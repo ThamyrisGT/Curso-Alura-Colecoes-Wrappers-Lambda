@@ -55,6 +55,8 @@ public class Teste {
 		Collections.sort(lista, new NumeroDaContaComparator());
 		Collections.sort(lista);
 		Collections.reverse(lista);
+		Collections.shuffle(lista);  //Para embaralhar
+		Collections.rotate(lista, 5); //rotacionar 5 posicoes
 		
 
 		System.out.println("--------------------------------------");
