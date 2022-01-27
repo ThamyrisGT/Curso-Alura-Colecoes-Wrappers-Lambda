@@ -1,7 +1,6 @@
 package br.com.bytebank.banco.test.util;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -43,62 +42,32 @@ public class Teste {
 		lista.add(cc3);
 		lista.add(cc4);
 
-		for (Conta conta : lista) {
-			System.out.println(conta);
-		}
+		// Function Object
+		lista.sort(new Comparator<Conta>() { // classe anonima
 
-		// NumeroDaContaComparator comparator = new NumeroDaContaComparator();
-		//lista.sort(null); ai pega a ordem natural setada na classe conta
-		lista.sort(new TitularDaContaComparator());
+			@Override
+			public int compare(Conta c1, Conta c2) {
 
-		// Antes da atualização java 5 era feito assim:
-		Collections.sort(lista, new NumeroDaContaComparator());
-		Collections.sort(lista);
-		Collections.reverse(lista);
-		Collections.shuffle(lista);  //Para embaralhar
-		Collections.rotate(lista, 5); //rotacionar 5 posicoes
-		
+				return Integer.compare(c1.getNumero(), c2.getNumero());
 
-		System.out.println("--------------------------------------");
+			}
+		});
 
-		for (Conta conta : lista) {
-			System.out.println(conta + "," + conta.getTitular().getNome());
-		}
-
-	}
-}
-
-class TitularDaContaComparator implements Comparator<Conta> {
-
-	@Override
-	public int compare(Conta c1, Conta c2) {
-		String nomeC1 = c1.getTitular().getNome();
-		String nomeC2 = c2.getTitular().getNome();
-
-		return nomeC1.compareTo(nomeC2);
-
-	}
-}
-
-class NumeroDaContaComparator implements Comparator<Conta> {
-
-	@Override
-	public int compare(Conta c1, Conta c2) {
-
-		// opção 1
-		return Integer.compare(c1.getNumero(), c2.getNumero());
-
-		// opção 2
-		// return c1.getNumero() - c2.getNumero();
-
-		// opçãp 3
-//		if (c1.getNumero() < c2.getNumero()) {
-//			return -1;
+//		for (Conta conta : lista) {
+//			System.out.println(conta);
 //		}
-//		if (c1.getNumero() > c2.getNumero()) {
-//			return 1;
-//		}
-//		return 0;
+
+		Comparator<Conta> comp = new Comparator<Conta>() {
+
+			@Override
+			public int compare(Conta c1, Conta c2) {
+				String nomeC1 = c1.getTitular().getNome();
+				String nomeC2 = c2.getTitular().getNome();
+
+				return nomeC1.compareTo(nomeC2);
+
+			}
+		};
 	}
 
 }
